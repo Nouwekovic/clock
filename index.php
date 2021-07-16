@@ -1,7 +1,7 @@
 <?php
-date_default_timezone_set('Europe/Prague');
 $timeperiod = date("a");
-$hours = idate("g");
+// +2 kvůli heroku ,které má UTC +0:00 a nepochopitelně nechce změnit timezone.
+$hours = idate("g")+2;
 $minutes = idate("i");
 $seconds = idate("s");
 $hDeg = $hours * 30 + $minutes * (360 / 720);
@@ -21,9 +21,11 @@ $time = "$hours:$minutes:$seconds";
           transform="rotate(<?=(int)$sDeg ?> 100 100)">
     </line>
     <?php
+    // vykreslení čár pro hodiny
     for ($i = 1; $i <= 12; $i++) {
         echo '<line id="dial" style="stroke: #000; stroke-width: 2px" x1="100" y1="20" x2="100" y2="35" transform="rotate(' . $i * 360 / 12 . ' 100 100)"></line>';
     }
+    // vykreslení čár pro minuty a sekundy
     for ($i = 1; $i <= 60; $i++) {
         echo '<line id="dial" style="stroke: #000; stroke-width: 1px" x1="100" y1="20" x2="100" y2="30" transform="rotate(' . $i * 360 / 60 . ' 100 100)"></line>';
     }
@@ -31,4 +33,3 @@ $time = "$hours:$minutes:$seconds";
     <text id="period" style="stroke: #00008B; stroke-width: 1px; z-index: 3;" x="90" y="145"><?= $timeperiod ?></text>
     <text id="period" style="stroke: #00008B; stroke-width: 1px; z-index: 3;" x="75" y="125"><?= $time ?></text>
 </svg>
-<?php echo date_default_timezone_get();?>
