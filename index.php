@@ -31,3 +31,4 @@ $time = "$hours:$minutes:$seconds";
     <text id="period" style="stroke: #00008B; stroke-width: 1px; z-index: 3;" x="90" y="145"><?= $timeperiod ?></text>
     <text id="period" style="stroke: #00008B; stroke-width: 1px; z-index: 3;" x="75" y="125"><?= $time ?></text>
 </svg>
+<?php echo date_default_timezone_get();?>
